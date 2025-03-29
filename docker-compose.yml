@@ -5,5 +5,10 @@ services:
       dockerfile: Dockerfile
     container_name: user-admin-client
     ports:
-      - "3000:80"
-    restart: unless-stopped
+      - '5173:5173'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - HOST=0.0.0.0
+    command: npm run dev -- --host
