@@ -1,49 +1,152 @@
 <template>
-  <el-form @submit.prevent="handleSubmit(onSubmit)">
-    <el-form-item label="Name" :error="errors.name?.[0]">
-      <el-input name="name" v-model="values.name" />
-    </el-form-item>
+  <el-form label-position="top" @submit.prevent="submitForm">
+    <div class="fields">
+      <el-form-item label="Name" :error="nameError">
+        <el-input name="name" v-model="name" />
+      </el-form-item>
 
-    <el-form-item label="Email" :error="errors.email?.[0]">
-      <el-input name="email" v-model="values.email" />
-    </el-form-item>
+      <el-form-item label="Email" :error="emailError">
+        <el-input name="email" type="email" v-model="email" />
+      </el-form-item>
 
-    <el-form-item label="Age" :error="errors.age?.[0]">
-      <el-input name="age" type="number" v-model.number="values.age" />
-    </el-form-item>
+      <el-form-item label="Age" :error="ageError">
+        <el-input-number
+          name="age"
+          v-model="age"
+          :step="1"
+          :precision="0"
+          :controls="false"
+          @input="onAgeInput"
+          @keypress="onAgeKeyPress"
+          @wheel.prevent
+        />
+      </el-form-item>
+    </div>
 
     <el-form-item>
       <el-button type="primary" native-type="submit">Submit</el-button>
     </el-form-item>
   </el-form>
+
+  <el-alert
+    v-if="formError"
+    type="error"
+    class="form-alert"
+    :title="formError"
+    closable
+    @close="formError = null"
+  />
+
+  <el-alert
+    v-if="formSuccess"
+    type="success"
+    class="form-alert"
+    :title="formSuccess"
+    closable
+    @close="formSuccess = null"
+  />
 </template>
 
 <script setup lang="ts">
-import { object, string, number, type InferType } from 'yup'
-import { useForm } from 'vee-validate'
-
-type FormValues = InferType<typeof schema>
+import { object, string, number } from 'yup'
+import { useForm, useField } from 'vee-validate'
+import { ref } from 'vue'
 
 const schema = object({
-  name: string().required(),
-  email: string().email().required(),
-  age: number().required().min(19), // greater than 18
+  name: string().required('Name is required'),
+  email: string().email('Invalid email').required('Email is required'),
+  age: number()
+    .typeError('Age must be a number')
+    .required('Age is required')
+    .min(19, 'Must be over 18'),
 })
 
-const { handleSubmit, values, errors, setFieldValue } = useForm<FormValues>({
+type FormValues = {
+  name: string
+  email: string
+  age: number | null
+}
+
+const formError = ref<string | null>(null)
+const formSuccess = ref<string | null>(null)
+
+const { handleSubmit, resetForm } = useForm<FormValues>({
   validationSchema: schema,
+  validateOnMount: false,
+  initialValues: {
+    name: '',
+    email: '',
+    age: null,
+  },
 })
+
+const { value: name, errorMessage: nameError } = useField<string>('name')
+const { value: email, errorMessage: emailError } = useField<string>('email')
+const { value: age, errorMessage: ageError } = useField<number | null>('age')
+
+function onAgeInput(value: number | null) {
+  if (typeof value !== 'number' || isNaN(value)) {
+    age.value = null
+  }
+}
+
+function onAgeKeyPress(event: KeyboardEvent) {
+  const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+  if (!allowedKeys.includes(event.key)) {
+    event.preventDefault()
+  }
+}
+
+function setFormError(message: string | null) {
+  formError.value = message
+  formSuccess.value = null
+}
+
+function setFormSuccess(message: string | null) {
+  formSuccess.value = message
+  formError.value = null
+}
 
 const emit = defineEmits<{
-  (e: 'submit', payload: typeof values): void
+  (e: 'submit', payload: FormValues): void
 }>()
 
-function onSubmit(values: FormValues) {
+const submitForm = handleSubmit((values: FormValues) => {
   emit('submit', values)
+})
+
+function setFormValues(payload: FormValues) {
+  name.value = payload.name
+  email.value = payload.email
+  age.value = payload.age
+}
+
+function clearForm() {
+  resetForm({ values: { name: '', email: '', age: null }, errors: {} })
+  formError.value = null
+  formSuccess.value = null
 }
 
 defineExpose({
-  setFieldValue,
-  submitForm: handleSubmit(onSubmit),
+  submitForm,
+  setFormValues,
+  setFormError,
+  setFormSuccess,
+  clearForm,
 })
 </script>
+
+<style scoped>
+.fields {
+  margin-bottom: 1.5rem;
+}
+
+.el-form-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-alert {
+  margin-top: 1rem;
+}
+</style>
