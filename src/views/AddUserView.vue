@@ -30,8 +30,14 @@ async function handleSubmit(payload: { name: string; email: string; age: number 
 
 <style scoped>
 .add-user-view {
-  max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
+  text-align: center;
+}
+
+.add-user-view h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
 }
 </style>

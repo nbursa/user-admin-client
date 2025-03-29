@@ -1,50 +1,52 @@
 <template>
-  <el-form label-position="top" @submit.prevent="submitForm">
-    <div class="fields">
-      <el-form-item label="Name" :error="nameError">
-        <el-input name="name" v-model="name" />
+  <div class="form-wrapper">
+    <el-form label-position="top" @submit.prevent="submitForm">
+      <div class="fields">
+        <el-form-item label="Name" :error="nameError">
+          <el-input name="name" v-model="name" />
+        </el-form-item>
+
+        <el-form-item label="Email" :error="emailError">
+          <el-input name="email" type="email" v-model="email" />
+        </el-form-item>
+
+        <el-form-item label="Age" :error="ageError">
+          <el-input-number
+            name="age"
+            v-model="age"
+            :step="1"
+            :precision="0"
+            :controls="false"
+            @input="onAgeInput"
+            @keypress="onAgeKeyPress"
+            @wheel.prevent
+          />
+        </el-form-item>
+      </div>
+
+      <el-form-item>
+        <el-button type="success" native-type="submit">Submit</el-button>
       </el-form-item>
+    </el-form>
 
-      <el-form-item label="Email" :error="emailError">
-        <el-input name="email" type="email" v-model="email" />
-      </el-form-item>
+    <el-alert
+      v-if="formError"
+      type="error"
+      class="form-alert"
+      :title="formError"
+      closable
+      @close="formError = null"
+    />
 
-      <el-form-item label="Age" :error="ageError">
-        <el-input-number
-          name="age"
-          v-model="age"
-          :step="1"
-          :precision="0"
-          :controls="false"
-          @input="onAgeInput"
-          @keypress="onAgeKeyPress"
-          @wheel.prevent
-        />
-      </el-form-item>
-    </div>
-
-    <el-form-item>
-      <el-button type="primary" native-type="submit">Submit</el-button>
-    </el-form-item>
-  </el-form>
-
-  <el-alert
-    v-if="formError"
-    type="error"
-    class="form-alert"
-    :title="formError"
-    closable
-    @close="formError = null"
-  />
-
-  <el-alert
-    v-if="formSuccess"
-    type="success"
-    class="form-alert"
-    :title="formSuccess"
-    closable
-    @close="formSuccess = null"
-  />
+    <el-alert
+      v-if="formSuccess"
+      type="success"
+      class="form-alert"
+      :title="formSuccess"
+      closable
+      @close="formSuccess = null"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -137,6 +139,51 @@ defineExpose({
 </script>
 
 <style scoped>
+.form-wrapper {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+:deep(.el-input__wrapper),
+:deep(.el-input-number__wrapper) {
+  background-color: var(--color-background-soft);
+  color: var(--color-text);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+:deep(.el-input__inner),
+:deep(.el-input-number__inner) {
+  background-color: transparent;
+  color: var(--color-text);
+}
+
+:deep(.el-form-item__label) {
+  color: var(--color-text);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+:deep(.el-button--success) {
+  background-color: #42b983;
+  border-color: #42b983;
+  color: #fff;
+}
+
+:deep(.el-button--success:hover) {
+  background-color: #36976f;
+  border-color: #36976f;
+}
+
+.el-form {
+  background-color: var(--color-background-soft);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
+}
+
 .fields {
   margin-bottom: 1.5rem;
 }
