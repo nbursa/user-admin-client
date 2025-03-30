@@ -56,7 +56,7 @@ fetchUsers()
         </el-form-item>
       </el-form>
 
-      <div class="user-table-wrapper">
+      <div class="user-table-container">
         <el-table :data="users" class="user-table">
           <el-table-column prop="name" :label="t('users.name')" />
           <el-table-column prop="email" :label="t('users.email')" />
@@ -117,7 +117,7 @@ fetchUsers()
   margin-bottom: 1.5rem;
 }
 
-.user-table-wrapper {
+.user-table-container {
   flex: 1 1 auto;
   overflow-y: auto;
   min-height: 0;
