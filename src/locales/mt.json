@@ -38,7 +38,13 @@
       "emailRequired": "L-email hija obbligatorja",
       "emailInvalid": "Email mhux validu",
       "ageRequired": "L-età hija obbligatorja",
-      "ageMin": "Għandu jkun aktar minn 18-il sena"
+      "ageMin": "Għandu jkun aktar minn 18-il sena",
+      "emailExists": "L-email diġà teżisti",
+      "invalidInput": "Input mhux validu fil-formola"
     }
+  },
+  "errors": {
+    "generic": "Xi ħaġa marret ħażin",
+    "unexpected": "Żball mhux mistenni seħħ"
   }
 }

@@ -24,7 +24,7 @@ type FormValues = {
 const formError = ref<string | null>(null)
 const formSuccess = ref<string | null>(null)
 
-const { handleSubmit, resetForm } = useForm<FormValues>({
+const { handleSubmit, resetForm, setFieldError } = useForm<FormValues>({
   validationSchema: schema,
   validateOnMount: false,
   initialValues: {
@@ -87,6 +87,7 @@ defineExpose({
   setFormError,
   setFormSuccess,
   clearForm,
+  setFieldError,
 })
 </script>
 

@@ -38,7 +38,13 @@
       "emailRequired": "Email is required",
       "emailInvalid": "Invalid email",
       "ageRequired": "Age is required",
-      "ageMin": "Must be over 18"
+      "ageMin": "Must be over 18",
+      "emailExists": "Email already exists",
+      "invalidInput": "Invalid form input"
     }
+  },
+  "errors": {
+    "generic": "Something went wrong",
+    "unexpected": "Unexpected error occurred"
   }
 }

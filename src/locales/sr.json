@@ -38,7 +38,13 @@
       "emailRequired": "Email je obavezan",
       "emailInvalid": "Neispravan email",
       "ageRequired": "Godine su obavezne",
-      "ageMin": "Mora imati više od 18 godina"
+      "ageMin": "Mora imati više od 18 godina",
+      "emailExists": "Email adresa je već u upotrebi",
+      "invalidInput": "Neispravan unos u formi"
     }
+  },
+  "errors": {
+    "generic": "Došlo je do greške",
+    "unexpected": "Neočekivana greška"
   }
 }

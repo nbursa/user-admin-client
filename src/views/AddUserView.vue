@@ -2,20 +2,35 @@
 import AddUserForm from '@/components/AddUserForm.vue'
 import { ref } from 'vue'
 import axios from 'axios'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const API_URL = import.meta.env.VITE_API_URL
 
 const formRef = ref<InstanceType<typeof AddUserForm> | null>(null)
 
 async function handleSubmit(payload: { name: string; email: string; age: number | null }) {
   try {
-    await axios.post('http://localhost:8080/users', payload)
+    await axios.post(`${API_URL}/users`, payload)
     formRef.value?.clearForm()
-    formRef.value?.setFormSuccess('User created successfully')
+    formRef.value?.setFormSuccess(t('form.success'))
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
-      const message = error.response?.data?.error || 'Something went wrong'
-      formRef.value?.setFormError(message)
+      const raw = error.response?.data?.error || ''
+      const messageMap: Record<string, string> = {
+        'email already in use': t('form.errors.emailExists'),
+        'Invalid input': t('form.errors.invalidInput'),
+        '': t('errors.generic'),
+      }
+      const friendly = messageMap[raw] || raw || t('errors.generic')
+      formRef.value?.setFormError(friendly)
+
+      if (raw === 'email already in use') {
+        formRef.value?.setFieldError('email', t('form.errors.emailExists'))
+      }
     } else {
-      formRef.value?.setFormError('Unexpected error')
+      formRef.value?.setFormError(t('errors.unexpected'))
     }
   }
 }
