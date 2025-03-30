@@ -8,7 +8,7 @@ export const useLocaleStore = defineStore(
     const { locale } = useI18n()
     const currentLang = ref(locale.value || 'en')
 
-    function setLanguage(lang: string) {
+    const setLanguage = (lang: string) => {
       currentLang.value = lang
       locale.value = lang
       document.documentElement.setAttribute('lang', lang)

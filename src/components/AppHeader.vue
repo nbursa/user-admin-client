@@ -10,7 +10,7 @@ const { locale, availableLocales } = useI18n()
 const theme = useThemeStore()
 const localeStore = useLocaleStore()
 
-function changeLang(lang: string) {
+const changeLang = (lang: string) => {
   localeStore.setLanguage(lang)
 }
 </script>
@@ -24,6 +24,11 @@ function changeLang(lang: string) {
         <RouterLink to="/" class="nav-link" active-class="active-link" exact>{{
           $t('nav.home')
         }}</RouterLink>
+
+        <RouterLink to="/users" class="nav-link" active-class="active-link">{{
+          $t('nav.users')
+        }}</RouterLink>
+
         <RouterLink to="/users/new" class="nav-link" active-class="active-link">{{
           $t('nav.addUser')
         }}</RouterLink>

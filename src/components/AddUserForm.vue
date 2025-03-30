@@ -38,25 +38,25 @@ const { value: name, errorMessage: nameError } = useField<string>('name')
 const { value: email, errorMessage: emailError } = useField<string>('email')
 const { value: age, errorMessage: ageError } = useField<number | null>('age')
 
-function onAgeInput(value: number | null) {
+const onAgeInput = (value: number | null) => {
   if (typeof value !== 'number' || isNaN(value)) {
     age.value = null
   }
 }
 
-function onAgeKeyPress(event: KeyboardEvent) {
+const onAgeKeyPress = (event: KeyboardEvent) => {
   const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
   if (!allowedKeys.includes(event.key)) {
     event.preventDefault()
   }
 }
 
-function setFormError(message: string | null) {
+const setFormError = (message: string | null) => {
   formError.value = message
   formSuccess.value = null
 }
 
-function setFormSuccess(message: string | null) {
+const setFormSuccess = (message: string | null) => {
   formSuccess.value = message
   formError.value = null
 }
@@ -69,13 +69,13 @@ const submitForm = handleSubmit((values: FormValues) => {
   emit('submit', values)
 })
 
-function setFormValues(payload: FormValues) {
+const setFormValues = (payload: FormValues) => {
   name.value = payload.name
   email.value = payload.email
   age.value = payload.age
 }
 
-function clearForm() {
+const clearForm = () => {
   resetForm({ values: { name: '', email: '', age: null }, errors: {} })
   formError.value = null
   formSuccess.value = null

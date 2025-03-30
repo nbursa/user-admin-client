@@ -3,14 +3,13 @@ import AddUserForm from '@/components/AddUserForm.vue'
 import { ref } from 'vue'
 import axios from 'axios'
 import { useI18n } from 'vue-i18n'
+import { API_URL } from '@/lib/api'
 
 const { t } = useI18n()
 
-const API_URL = import.meta.env.VITE_API_URL
-
 const formRef = ref<InstanceType<typeof AddUserForm> | null>(null)
 
-async function handleSubmit(payload: { name: string; email: string; age: number | null }) {
+const handleSubmit = async (payload: { name: string; email: string; age: number | null }) => {
   try {
     await axios.post(`${API_URL}/users`, payload)
     formRef.value?.clearForm()
