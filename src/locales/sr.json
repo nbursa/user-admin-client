@@ -1,0 +1,44 @@
+{
+  "app": {
+    "title": "Upravljanje korisnicima",
+    "addUser": "Dodaj novog korisnika",
+    "submit": "Pošalji"
+  },
+  "nav": {
+    "home": "Početna",
+    "addUser": "Dodaj korisnika"
+  },
+  "home": {
+    "title": "Dobrodošli u panel za upravljanje korisnicima",
+    "intro1": "Ovo je administratorski interfejs izgrađen sa Vue 3, Element Plus, VeeValidate i Vite.",
+    "intro2": "Koristite mobilnu ili navigaciju iznad da upravljate korisnicima, dodate nove unose ili istražite funkcionalnosti aplikacije.",
+    "features": {
+      "listing": {
+        "title": "Lista korisnika",
+        "desc": "Pretražujte, listajte i pregledajte sve korisnike u sistemu."
+      },
+      "edit": {
+        "title": "Kreirajte i uredite korisnike",
+        "desc": "Dodajte nove korisnike ili izmenite postojeće koristeći ugrađena pravila validacije."
+      },
+      "responsive": {
+        "title": "Responzivan i čist dizajn",
+        "desc": "Potpuno stilizovano Element Plus komponentama i spremno za mobilne uređaje."
+      }
+    }
+  },
+  "form": {
+    "title": "Dodaj novog korisnika",
+    "name": "Ime",
+    "email": "Email",
+    "age": "Godine",
+    "success": "Korisnik je uspešno dodat",
+    "errors": {
+      "nameRequired": "Ime je obavezno",
+      "emailRequired": "Email je obavezan",
+      "emailInvalid": "Neispravan email",
+      "ageRequired": "Godine su obavezne",
+      "ageMin": "Mora imati više od 18 godina"
+    }
+  }
+}

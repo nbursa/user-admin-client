@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <p>&copy; 2025 Vue.js-Golang</p>
+    <p>&copy; 2025 ABC Company</p>
   </footer>
 </template>
 

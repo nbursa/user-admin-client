@@ -23,7 +23,7 @@ async function handleSubmit(payload: { name: string; email: string; age: number 
 
 <template>
   <div class="add-user-view">
-    <h2>Add New User</h2>
+    <h2>{{ $t('form.title') }}</h2>
     <AddUserForm ref="formRef" @submit="handleSubmit" />
   </div>
 </template>

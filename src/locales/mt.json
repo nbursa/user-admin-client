@@ -1,0 +1,44 @@
+{
+  "app": {
+    "title": "Ġestjoni tal-Utenti",
+    "addUser": "Żid Utent Ġdid",
+    "submit": "Ibgħat"
+  },
+  "nav": {
+    "home": "Dar",
+    "addUser": "Żid Utent"
+  },
+  "home": {
+    "title": "Merħba fil-Panew tal-Ġestjoni tal-Utenti",
+    "intro1": "Dan huwa interface amministrattiv ħafif mibni b’Vue 3, Element Plus, VeeValidate u Vite.",
+    "intro2": "Uża l-bar laterali jew in-navigazzjoni ta’ fuq biex timmaniġġja utenti, iżżid entrati ġodda, jew tesplora l-karatteristiċi tal-app.",
+    "features": {
+      "listing": {
+        "title": "Lista tal-Utenti",
+        "desc": "Fittex, ibbrawżja u ara l-utenti kollha fis-sistema."
+      },
+      "edit": {
+        "title": "Oħloq u Editja Utenti",
+        "desc": "Żid utenti ġodda jew editja dawk eżistenti billi tuża regoli ta' validazzjoni mibnija minn qabel."
+      },
+      "responsive": {
+        "title": "Responsiv u Nadif",
+        "desc": "Stilizzat kompletament b’komponenti ta’ Element Plus u layout lest għall-mowbajl."
+      }
+    }
+  },
+  "form": {
+    "title": "Żid Utent Ġdid",
+    "name": "Isem",
+    "email": "Email",
+    "age": "Età",
+    "success": "L-utent ġie miżjud b'suċċess",
+    "errors": {
+      "nameRequired": "L-isem huwa obbligatorju",
+      "emailRequired": "L-email hija obbligatorja",
+      "emailInvalid": "Email mhux validu",
+      "ageRequired": "L-età hija obbligatorja",
+      "ageMin": "Għandu jkun aktar minn 18-il sena"
+    }
+  }
+}

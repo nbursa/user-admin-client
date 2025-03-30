@@ -1,0 +1,44 @@
+{
+  "app": {
+    "title": "User Management",
+    "addUser": "Add New User",
+    "submit": "Submit"
+  },
+  "nav": {
+    "home": "Home",
+    "addUser": "Add User"
+  },
+  "home": {
+    "title": "Welcome to the User Management Panel",
+    "intro1": "This is a lightweight admin interface built with Vue 3, Element Plus, VeeValidate adn Vite.",
+    "intro2": "Use the sidebar or navigation above to manage users, add new entries, or explore app features.",
+    "features": {
+      "listing": {
+        "title": "User Listing",
+        "desc": "Search, paginate, and browse all users in the system."
+      },
+      "edit": {
+        "title": "Create & Edit Users",
+        "desc": "Add new users or modify existing ones using built-in validation rules."
+      },
+      "responsive": {
+        "title": "Responsive & Clean",
+        "desc": "Fully styled with Element Plus components and mobile-ready layout."
+      }
+    }
+  },
+  "form": {
+    "title": "Add New User",
+    "name": "Name",
+    "email": "Email",
+    "age": "Age",
+    "success": "User created successfully",
+    "errors": {
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email",
+      "ageRequired": "Age is required",
+      "ageMin": "Must be over 18"
+    }
+  }
+}

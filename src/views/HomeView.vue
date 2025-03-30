@@ -1,34 +1,29 @@
-<script setup lang="ts"></script>
-
 <template>
   <main class="home">
-    <section class="hero">
-      <h1>Welcome to the User Management Panel</h1>
-      <p>This is a lightweight admin interface built with Vue 3 and Element Plus.</p>
-      <p>
-        Use the sidebar or navigation above to manage users, add new entries, or explore app
-        features.
-      </p>
+    <section class="intro">
+      <h1 class="title">{{ $t('home.title') }}</h1>
+      <p class="text">{{ $t('home.intro1') }}</p>
+      <p class="text">{{ $t('home.intro2') }}</p>
     </section>
 
     <section class="features">
       <el-row :gutter="20">
         <el-col :span="8">
-          <el-card shadow="hover">
-            <h3>User Listing</h3>
-            <p>Search, paginate, and browse all users in the system.</p>
+          <el-card class="feature-card">
+            <h3 class="feature-title">{{ $t('home.features.listing.title') }}</h3>
+            <p>{{ $t('home.features.listing.desc') }}</p>
           </el-card>
         </el-col>
         <el-col :span="8">
-          <el-card shadow="hover">
-            <h3>Create & Edit Users</h3>
-            <p>Add new users or modify existing ones using built-in validation rules.</p>
+          <el-card class="feature-card">
+            <h3 class="feature-title">{{ $t('home.features.edit.title') }}</h3>
+            <p>{{ $t('home.features.edit.desc') }}</p>
           </el-card>
         </el-col>
         <el-col :span="8">
-          <el-card shadow="hover">
-            <h3>Responsive & Clean</h3>
-            <p>Fully styled with Element Plus components and mobile-ready layout.</p>
+          <el-card class="feature-card">
+            <h3 class="feature-title">{{ $t('home.features.responsive.title') }}</h3>
+            <p>{{ $t('home.features.responsive.desc') }}</p>
           </el-card>
         </el-col>
       </el-row>
@@ -41,18 +36,42 @@
   padding: 2rem;
 }
 
-.hero {
+.intro {
   text-align: center;
   margin-bottom: 3rem;
 }
 
-.hero h1 {
+.title {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.text {
+  color: var(--color-text);
 }
 
 .features {
   max-width: 1000px;
   margin: 0 auto;
+}
+
+.feature-card {
+  background-color: var(--color-background-soft);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
+  padding: 1rem;
+  min-height: 12rem;
+}
+
+.feature-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 </style>

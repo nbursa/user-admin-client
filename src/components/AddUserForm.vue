@@ -1,66 +1,18 @@
-<template>
-  <div class="form-wrapper">
-    <el-form label-position="top" @submit.prevent="submitForm">
-      <div class="fields">
-        <el-form-item label="Name" :error="nameError">
-          <el-input name="name" v-model="name" />
-        </el-form-item>
-
-        <el-form-item label="Email" :error="emailError">
-          <el-input name="email" type="email" v-model="email" />
-        </el-form-item>
-
-        <el-form-item label="Age" :error="ageError">
-          <el-input-number
-            name="age"
-            v-model="age"
-            :step="1"
-            :precision="0"
-            :controls="false"
-            @input="onAgeInput"
-            @keypress="onAgeKeyPress"
-            @wheel.prevent
-          />
-        </el-form-item>
-      </div>
-
-      <el-form-item>
-        <el-button type="success" native-type="submit">Submit</el-button>
-      </el-form-item>
-    </el-form>
-
-    <el-alert
-      v-if="formError"
-      type="error"
-      class="form-alert"
-      :title="formError"
-      closable
-      @close="formError = null"
-    />
-
-    <el-alert
-      v-if="formSuccess"
-      type="success"
-      class="form-alert"
-      :title="formSuccess"
-      closable
-      @close="formSuccess = null"
-    />
-  </div>
-</template>
-
 <script setup lang="ts">
 import { object, string, number } from 'yup'
 import { useForm, useField } from 'vee-validate'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const schema = object({
-  name: string().required('Name is required'),
-  email: string().email('Invalid email').required('Email is required'),
+  name: string().required(t('form.errors.nameRequired')),
+  email: string().email(t('form.errors.emailInvalid')).required(t('form.errors.emailRequired')),
   age: number()
-    .typeError('Age must be a number')
-    .required('Age is required')
-    .min(19, 'Must be over 18'),
+    .typeError(t('form.errors.ageRequired'))
+    .required(t('form.errors.ageRequired'))
+    .min(19, t('form.errors.ageMin')),
 })
 
 type FormValues = {
@@ -138,42 +90,62 @@ defineExpose({
 })
 </script>
 
+<template>
+  <div class="form-wrapper">
+    <el-form label-position="top" @submit.prevent="submitForm" class="el-form">
+      <div class="fields">
+        <el-form-item :label="$t('form.name')" :error="nameError">
+          <el-input name="name" v-model="name" />
+        </el-form-item>
+
+        <el-form-item :label="$t('form.email')" :error="emailError">
+          <el-input name="email" type="email" v-model="email" />
+        </el-form-item>
+
+        <el-form-item :label="$t('form.age')" :error="ageError">
+          <el-input-number
+            name="age"
+            v-model="age"
+            :step="1"
+            :precision="0"
+            :controls="false"
+            @input="onAgeInput"
+            @keypress="onAgeKeyPress"
+            @wheel.prevent
+          />
+        </el-form-item>
+      </div>
+
+      <el-form-item>
+        <el-button type="success" native-type="submit">
+          {{ $t('app.submit') }}
+        </el-button>
+      </el-form-item>
+
+      <el-alert
+        v-if="formError"
+        type="error"
+        class="form-alert"
+        :title="formError"
+        closable
+        @close="formError = null"
+      />
+      <el-alert
+        v-if="formSuccess"
+        type="success"
+        class="form-alert"
+        :title="formSuccess"
+        closable
+        @close="formSuccess = null"
+      />
+    </el-form>
+  </div>
+</template>
+
 <style scoped>
 .form-wrapper {
-  max-width: 500px;
+  max-width: 25rem;
   margin: 0 auto;
-}
-
-:deep(.el-input__wrapper),
-:deep(.el-input-number__wrapper) {
-  background-color: var(--color-background-soft);
-  color: var(--color-text);
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
-}
-
-:deep(.el-input__inner),
-:deep(.el-input-number__inner) {
-  background-color: transparent;
-  color: var(--color-text);
-}
-
-:deep(.el-form-item__label) {
-  color: var(--color-text);
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-:deep(.el-button--success) {
-  background-color: #42b983;
-  border-color: #42b983;
-  color: #fff;
-}
-
-:deep(.el-button--success:hover) {
-  background-color: #36976f;
-  border-color: #36976f;
 }
 
 .el-form {
@@ -191,6 +163,51 @@ defineExpose({
 .el-form-item {
   display: flex;
   flex-direction: column;
+}
+
+.el-button {
+  width: 100%;
+  padding: 1rem 2rem;
+  min-width: 10rem;
+}
+
+:deep(.el-form-item__label) {
+  color: var(--color-text);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+:deep(.el-input__wrapper),
+:deep(.el-input-number__wrapper) {
+  background-color: var(--color-background-soft);
+  color: var(--color-text);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  border-color: var(--color-border);
+}
+
+:deep(.el-input__wrapper.is-focus),
+:deep(.el-input-number__wrapper.is-focus) {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 1px var(--color-accent);
+}
+
+:deep(.el-input__inner),
+:deep(.el-input-number__inner) {
+  background-color: transparent;
+  color: var(--color-text);
+}
+
+:deep(.el-button--success) {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+:deep(.el-button--success:hover) {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
 }
 
 .form-alert {

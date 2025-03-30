@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div id="app">
+  <div class="app-wrapper">
     <AppHeader />
-    <main>
+    <main class="flex-1 overflow-y-auto p-8">
       <RouterView />
     </main>
     <AppFooter />
@@ -15,14 +15,16 @@ import AppFooter from '@/components/AppFooter.vue'
 </template>
 
 <style scoped>
-#app {
+.app-wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
-main {
+.main-content {
   flex: 1;
   overflow-y: auto;
   padding: 2rem;
