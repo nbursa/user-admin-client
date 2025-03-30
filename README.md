@@ -1,45 +1,60 @@
-# .
+# User Admin Client
 
-This template should help get you started developing with Vue 3 in Vite.
+![Vue 3](https://img.shields.io/badge/Vue-3.x-42b883?logo=vue.js)
+![Vite](https://img.shields.io/badge/Vite-frontend-646cff?logo=vite)
+![Element Plus](https://img.shields.io/badge/Element_Plus-UI-blue?logo=element)
+![VeeValidate](https://img.shields.io/badge/VeeValidate-Validation-green)
+![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue?logo=typescript)
+![Pinia](https://img.shields.io/badge/Pinia-State_Management-yellow)
+![i18n](https://img.shields.io/badge/i18n-EN%2FSR%2FMT-purple)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-Utility--First-38bdf8?logo=tailwindcss)
+![Docker](https://img.shields.io/badge/Dockerized-FE%2FBE%2FMongo-blue?logo=docker)
 
-## Recommended IDE Setup
+A lightweight, responsive admin interface for managing users. Built using Vue 3, Vite, Element Plus, and VeeValidate.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Features
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
+- **User CRUD**: Create, read, update, and delete user records.
+- **Form validation**: Robust schema-based validation with VeeValidate and Yup.
+- **Internationalization (i18n)**: Available in English, Serbian, and Maltese.
+- **Dark/light theme**: Toggleable theme with persisted state.
+- **Mobile-friendly**: Fully responsive layout with clean design.
+- **Modern stack**: Vue 3 Composition API with TypeScript.
+- **Modular architecture**: Scalable, testable, and well-structured code.
+- **Dockerized**: Includes Docker setup for frontend, backend (Golang), and MongoDB(backend).
 
 ## Project Setup
 
-```sh
+```bash
 npm install
 ```
 
 ### Compile and Hot-Reload for Development
 
-```sh
+```bash
 npm run dev
 ```
 
 ### Type-Check, Compile and Minify for Production
 
-```sh
+```bash
 npm run build
 ```
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
 
-```sh
+```bash
 npm run test:unit
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
 
-```sh
+```bash
 npm run lint
 ```
+
+---
+
+## Backend
+
+See `user-admin-server` for the corresponding Golang backend and MongoDB setup.
