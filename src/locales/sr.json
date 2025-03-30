@@ -6,6 +6,7 @@
   },
   "nav": {
     "home": "Početna",
+    "users": "Korisnici",
     "addUser": "Dodaj korisnika"
   },
   "home": {
@@ -27,6 +28,12 @@
       }
     }
   },
+  "users": {
+    "search": "Pretraži korisnike...",
+    "name": "Ime",
+    "email": "Email",
+    "age": "Godine"
+  },
   "form": {
     "title": "Dodaj novog korisnika",
     "name": "Ime",
@@ -39,7 +46,7 @@
       "emailInvalid": "Neispravan email",
       "ageRequired": "Godine su obavezne",
       "ageMin": "Mora imati više od 18 godina",
-      "emailExists": "Email adresa je već u upotrebi",
+      "emailExists": "Korisnik sa ovom email adresom već postoji",
       "invalidInput": "Neispravan unos u formi"
     }
   },

@@ -6,6 +6,7 @@
   },
   "nav": {
     "home": "Dar",
+    "users": "Utenti",
     "addUser": "Żid Utent"
   },
   "home": {
@@ -27,6 +28,12 @@
       }
     }
   },
+  "users": {
+    "search": "Fittex utenti...",
+    "name": "Isem",
+    "email": "Email",
+    "age": "Età"
+  },
   "form": {
     "title": "Żid Utent Ġdid",
     "name": "Isem",
@@ -39,7 +46,7 @@
       "emailInvalid": "Email mhux validu",
       "ageRequired": "L-età hija obbligatorja",
       "ageMin": "Għandu jkun aktar minn 18-il sena",
-      "emailExists": "L-email diġà teżisti",
+      "emailExists": "Utent b'dan l-email diġà jeżisti",
       "invalidInput": "Input mhux validu fil-formola"
     }
   },

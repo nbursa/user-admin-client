@@ -6,6 +6,7 @@
   },
   "nav": {
     "home": "Home",
+    "users": "Users",
     "addUser": "Add User"
   },
   "home": {
@@ -27,6 +28,12 @@
       }
     }
   },
+  "users": {
+    "search": "Search users...",
+    "name": "Name",
+    "email": "Email",
+    "age": "Age"
+  },
   "form": {
     "title": "Add New User",
     "name": "Name",
@@ -39,7 +46,7 @@
       "emailInvalid": "Invalid email",
       "ageRequired": "Age is required",
       "ageMin": "Must be over 18",
-      "emailExists": "Email already exists",
+      "emailExists": "A user with this email already exists",
       "invalidInput": "Invalid form input"
     }
   },
