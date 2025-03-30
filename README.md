@@ -57,4 +57,4 @@ npm run lint
 
 ## Backend
 
-See `user-admin-server` for the corresponding Golang backend and MongoDB setup.
+See [user-admin-api](https://github.com/nbursa/user-admin-api) for the corresponding Golang backend and MongoDB setup.
