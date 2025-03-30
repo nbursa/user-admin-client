@@ -10,12 +10,13 @@ const { t } = useI18n()
 const search = ref('')
 const users = ref([])
 const total = ref(0)
+const perPage = ref(10)
 const currentPage = ref(1)
 
 const fetchUsers = async () => {
   try {
     const response = await axios.get(`${API_URL}/users`, {
-      params: { search: search.value },
+      params: { search: search.value, page: currentPage.value, limit: perPage.value },
     })
     users.value = response.data.users
     total.value = response.data.total
@@ -30,47 +31,69 @@ const handlePageChange = (page: number) => {
 
 const debouncedFetch = debounce(fetchUsers, 300)
 
-watch(search, () => debouncedFetch())
+watch(search, () => {
+  currentPage.value = 1
+  debouncedFetch()
+})
 watch(currentPage, () => fetchUsers())
 
 fetchUsers()
 </script>
 
 <template>
+  <h2 class="users-title">{{ $t('users.title') }}</h2>
   <div class="user-list-view">
-    <el-form class="search-form" label-position="top">
-      <el-form-item>
-        <el-input
-          v-model="search"
-          class="user-search"
-          type="text"
-          :placeholder="t('users.search')"
-          clearable
-        />
-      </el-form-item>
-    </el-form>
+    <div class="user-list-container">
+      <el-form class="search-form" label-position="top">
+        <el-form-item>
+          <el-input
+            v-model="search"
+            class="user-search"
+            type="text"
+            :placeholder="t('users.search')"
+            clearable
+          />
+        </el-form-item>
+      </el-form>
 
-    <el-table :data="users" class="user-table">
-      <el-table-column prop="name" :label="t('users.name')" />
-      <el-table-column prop="email" :label="t('users.email')" />
-      <el-table-column prop="age" :label="t('users.age')" />
-    </el-table>
+      <div class="user-table-wrapper">
+        <el-table :data="users" class="user-table">
+          <el-table-column prop="name" :label="t('users.name')" />
+          <el-table-column prop="email" :label="t('users.email')" />
+          <el-table-column prop="age" :label="t('users.age')" />
+        </el-table>
+      </div>
 
-    <el-pagination
-      class="user-pagination"
-      layout="prev, pager, next"
-      :total="total"
-      :page-size="10"
-      :current-page="currentPage"
-      @current-change="handlePageChange"
-    />
+      <el-pagination
+        class="user-pagination"
+        layout="prev, pager, next"
+        :total="total"
+        :page-size="perPage"
+        :current-page="currentPage"
+        @current-change="handlePageChange"
+      />
+    </div>
   </div>
 </template>
 
 <style scoped>
+.users-title {
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  font-weight: 600;
+}
+
 .user-list-view {
+  height: 54vh;
   max-width: 40rem;
-  margin: 3rem auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
   padding: 1rem;
   background-color: var(--color-background-soft);
   border-radius: 8px;
@@ -78,8 +101,26 @@ fetchUsers()
   transition: background-color 0.3s ease;
 }
 
+.user-list-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 40rem;
+  width: 100%;
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+}
+
 .search-form {
   margin-bottom: 1.5rem;
+}
+
+.user-table-wrapper {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 :deep(.el-input__wrapper) {
@@ -122,6 +163,12 @@ fetchUsers()
   color: var(--color-text);
 }
 
+:deep(.el-pager) {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
 :deep(.el-pager li) {
   background-color: transparent;
   border-radius: 4px;
@@ -141,9 +188,12 @@ fetchUsers()
   font-weight: bold;
 }
 
-:deep(.el-pagination button:disabled) {
+:deep(.el-pagination button) {
   background-color: var(--color-accent);
-  opacity: 0.75;
+}
+
+:deep(.el-pagination button:disabled) {
+  opacity: 0.5;
 }
 
 :deep(.el-pagination button .el-icon svg) {

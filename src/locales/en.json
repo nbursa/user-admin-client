@@ -12,7 +12,7 @@
   "home": {
     "title": "Welcome to the User Management Panel",
     "intro1": "This is a lightweight admin interface built with Vue 3, Element Plus, VeeValidate adn Vite.",
-    "intro2": "Use the sidebar or navigation above to manage users, add new entries, or explore app features.",
+    "intro2": "Use mobile or header navigation to manage users, add new entries, or explore app features.",
     "features": {
       "listing": {
         "title": "User Listing",
@@ -29,6 +29,7 @@
     }
   },
   "users": {
+    "title": "Users",
     "search": "Search users...",
     "name": "Name",
     "email": "Email",

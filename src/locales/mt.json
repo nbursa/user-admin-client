@@ -12,7 +12,7 @@
   "home": {
     "title": "Merħba fil-Panew tal-Ġestjoni tal-Utenti",
     "intro1": "Dan huwa interface amministrattiv ħafif mibni b’Vue 3, Element Plus, VeeValidate u Vite.",
-    "intro2": "Uża l-bar laterali jew in-navigazzjoni ta’ fuq biex timmaniġġja utenti, iżżid entrati ġodda, jew tesplora l-karatteristiċi tal-app.",
+    "intro2": "Uża l-menu tan-navigazzjoni jew tal-mobile biex timmaniġġja l-utenti, iżżid entrati ġodda, jew tesplora l-karatteristiċi tal-app.",
     "features": {
       "listing": {
         "title": "Lista tal-Utenti",
