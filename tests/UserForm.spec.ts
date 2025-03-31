@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import AddUserForm from '@/components/AddUserForm.vue'
+import UserForm from '@/components/UserForm.vue'
 import ElementPlus from 'element-plus'
 import { createI18n } from 'vue-i18n'
 
@@ -14,6 +14,7 @@ const i18n = createI18n({
         age: 'Age',
         title: 'Add User',
         success: 'User created successfully',
+        deleteSuccess: 'User deleted successfully',
         errors: {
           nameRequired: 'Name is required',
           emailRequired: 'Email is required',
@@ -26,6 +27,8 @@ const i18n = createI18n({
       },
       app: {
         submit: 'Submit',
+        update: 'Update',
+        delete: 'Delete',
       },
       errors: {
         generic: 'Something went wrong',
@@ -35,9 +38,9 @@ const i18n = createI18n({
   },
 })
 
-describe('AddUserForm', () => {
+describe('UserForm', () => {
   it('renders form with name, email, and age fields', () => {
-    const wrapper = mount(AddUserForm, {
+    const wrapper = mount(UserForm, {
       global: {
         plugins: [ElementPlus, i18n],
       },
@@ -49,13 +52,13 @@ describe('AddUserForm', () => {
   })
 
   it('emits submit event with valid data', async () => {
-    const wrapper = mount(AddUserForm, {
+    const wrapper = mount(UserForm, {
       global: {
         plugins: [ElementPlus, i18n],
       },
     })
 
-    const vm = wrapper.vm as {
+    const vm = wrapper.vm as unknown as {
       submitForm: () => Promise<void>
       setFormValues: (values: { name: string; email: string; age: number }) => void
     }
@@ -74,5 +77,24 @@ describe('AddUserForm', () => {
       email: 'john@test.com',
       age: 25,
     })
+  })
+
+  it('renders update/delete buttons in edit mode', () => {
+    const wrapper = mount(UserForm, {
+      props: {
+        mode: 'edit',
+        initialValues: {
+          name: 'Jane Doe',
+          email: 'jane@example.com',
+          age: 30,
+        },
+      },
+      global: {
+        plugins: [ElementPlus, i18n],
+      },
+    })
+
+    expect(wrapper.text()).toContain('Update')
+    expect(wrapper.text()).toContain('Delete')
   })
 })
