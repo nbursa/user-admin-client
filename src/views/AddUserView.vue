@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AddUserForm from '@/components/AddUserForm.vue'
+import UserForm from '@/components/UserForm.vue'
 import { ref } from 'vue'
 import axios from 'axios'
 import { useI18n } from 'vue-i18n'
@@ -7,7 +7,7 @@ import { API_URL } from '@/lib/api'
 
 const { t } = useI18n()
 
-const formRef = ref<InstanceType<typeof AddUserForm> | null>(null)
+const formRef = ref<InstanceType<typeof UserForm> | null>(null)
 
 const handleSubmit = async (payload: { name: string; email: string; age: number | null }) => {
   try {
@@ -38,7 +38,7 @@ const handleSubmit = async (payload: { name: string; email: string; age: number 
 <template>
   <div class="add-user-view">
     <h2>{{ $t('form.title') }}</h2>
-    <AddUserForm ref="formRef" @submit="handleSubmit" />
+    <UserForm ref="formRef" @submit="handleSubmit" />
   </div>
 </template>
 
