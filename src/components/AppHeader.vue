@@ -5,8 +5,12 @@ import { useThemeStore } from '@/stores/theme'
 import { useLocaleStore } from '@/stores/locale'
 import SunIcon from '@/components/icons/SunIcon.vue'
 import MoonIcon from '@/components/icons/MoonIcon.vue'
+import { Menu as IEPMenu } from '@element-plus/icons-vue'
 
 const { locale, availableLocales } = useI18n()
+
+const emit = defineEmits(['toggle-sidebar'])
+
 const theme = useThemeStore()
 const localeStore = useLocaleStore()
 
@@ -49,6 +53,10 @@ const changeLang = (lang: string) => {
         <button class="theme-toggle" @click="theme.toggleTheme">
           <component :is="theme.isDark ? MoonIcon : SunIcon" class="theme-icon" />
         </button>
+
+        <el-button class="mobile-nav-toggle" @click="emit('toggle-sidebar')" circle plain>
+          <el-icon><IEPMenu /></el-icon>
+        </el-button>
       </div>
     </div>
   </header>
@@ -59,12 +67,12 @@ const changeLang = (lang: string) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem;
 }
 
 .logo {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 
 .right {
@@ -83,29 +91,48 @@ const changeLang = (lang: string) => {
 .nav-link {
   color: var(--color-text);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
 }
 
 .nav-link:hover {
   color: var(--color-accent);
-  background-color: transparent;
+  background-color: var(--color-background-mute);
 }
 
 .active-link {
   color: var(--color-accent);
 }
 
+.sidebar-nav a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.sidebar-nav a:hover {
+  background-color: var(--color-accent);
+  color: white;
+}
+
 .actions {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .lang-toggle,
 .theme-toggle {
-  font-size: 0.9rem;
+  font-size: 1.25rem;
   color: gray;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -120,8 +147,47 @@ const changeLang = (lang: string) => {
 }
 
 .theme-icon {
-  width: 18px;
-  height: 18px;
+  width: 25px;
+  height: 25px;
   display: block;
+}
+
+.mobile-nav-toggle {
+  display: none;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+:deep(.el-dropdown-menu__item:hover) {
+  background-color: var(--color-background-mute) !important;
+  color: var(--color-text) !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-nav-toggle {
+    display: inline-flex;
+    background-color: transparent;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  :deep(.el-dropdown-menu__item) {
+    padding: 12px 20px !important;
+    font-size: 1rem !important;
+  }
+
+  :deep(.el-dropdown-menu) {
+    min-width: 120px;
+  }
+
+  .actions {
+    gap: 0.5rem;
+  }
 }
 </style>

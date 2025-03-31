@@ -41,61 +41,81 @@ fetchUsers()
 </script>
 
 <template>
-  <h2 class="users-title">{{ $t('users.title') }}</h2>
-  <div class="user-list-view">
-    <div class="user-list-container">
-      <el-form class="search-form" label-position="top">
-        <el-form-item>
-          <el-input
-            v-model="search"
-            class="user-search"
-            type="text"
-            :placeholder="t('users.search')"
-            clearable
-          />
-        </el-form-item>
-      </el-form>
+  <div class="users">
+    <h2 class="users-title">{{ $t('users.title') }}</h2>
+    <div class="user-list-view">
+      <div class="user-list-container">
+        <el-form class="search-form" label-position="top">
+          <el-form-item>
+            <el-input
+              v-model="search"
+              class="user-search"
+              type="text"
+              :placeholder="t('users.search')"
+              clearable
+            />
+          </el-form-item>
+        </el-form>
 
-      <div class="user-table-container">
-        <el-table :data="users" class="user-table">
-          <el-table-column prop="name" :label="t('users.name')" />
-          <el-table-column prop="email" :label="t('users.email')" />
-          <el-table-column prop="age" :label="t('users.age')" />
-        </el-table>
+        <div class="user-table-container">
+          <el-table
+            :data="users"
+            class="user-table"
+            style="width: 100%"
+            max-height="calc(72vh - 150px)"
+            header-cell-class-name="table-header"
+            :empty-text="t('users.noData')"
+          >
+            <el-table-column prop="name" :label="t('users.name')" min-width="60" max-width="80" />
+            <el-table-column prop="email" :label="t('users.email')" />
+            <el-table-column
+              prop="age"
+              :label="t('users.age')"
+              min-width="60"
+              max-width="80"
+              align="center"
+            />
+          </el-table>
+        </div>
+
+        <el-pagination
+          class="user-pagination"
+          layout="prev, pager, next"
+          :total="total"
+          :page-size="perPage"
+          :current-page="currentPage"
+          @current-change="handlePageChange"
+        />
       </div>
-
-      <el-pagination
-        class="user-pagination"
-        layout="prev, pager, next"
-        :total="total"
-        :page-size="perPage"
-        :current-page="currentPage"
-        @current-change="handlePageChange"
-      />
     </div>
   </div>
 </template>
 
 <style scoped>
+.users {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+
 .users-title {
   width: 100%;
   text-align: center;
   font-size: 2rem;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  margin-bottom: 0.25rem;
   font-weight: 600;
 }
 
 .user-list-view {
-  height: 54vh;
+  height: 72vh;
   max-width: 40rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin: 0 auto;
-  padding: 1rem;
-  background-color: var(--color-background-soft);
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
   transition: background-color 0.3s ease;
@@ -105,22 +125,19 @@ fetchUsers()
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-width: 40rem;
   width: 100%;
-  background-color: var(--color-background-soft);
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-  padding: 1rem;
 }
 
 .search-form {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .user-table-container {
-  flex: 1 1 auto;
-  overflow-y: auto;
+  flex: 1;
   min-height: 0;
+  overflow: hidden;
 }
 
 :deep(.el-input__wrapper) {
@@ -130,6 +147,8 @@ fetchUsers()
     background-color 0.3s ease,
     color 0.3s ease;
   border-color: var(--color-border);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 :deep(.el-input__wrapper.is-focus) {
@@ -145,7 +164,6 @@ fetchUsers()
 .user-table {
   background-color: transparent;
   border-radius: 6px;
-  margin-bottom: 1.5rem;
 }
 
 .user-pagination {
@@ -153,10 +171,14 @@ fetchUsers()
   justify-content: center;
   gap: 1rem;
   padding: 1rem 0;
-  background-color: var(--color-background-soft);
   border-radius: 8px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.04);
   transition: background-color 0.3s ease;
+}
+
+:deep(.el-table td.el-table__cell),
+:deep(.el-table th.el-table__cell.is-leaf) {
+  border-bottom: 1px solid var(--color-border);
 }
 
 :deep(.el-pagination) {
@@ -198,5 +220,19 @@ fetchUsers()
 
 :deep(.el-pagination button .el-icon svg) {
   color: var(--vt-c-white-soft);
+}
+
+@media (max-width: 768px) {
+  :deep(.el-table__cell) {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .user-list-view {
+    padding: 1rem;
+  }
 }
 </style>

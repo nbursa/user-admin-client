@@ -32,7 +32,8 @@
     "search": "Fittex utenti...",
     "name": "Isem",
     "email": "Email",
-    "age": "Età"
+    "age": "Età",
+    "noData": "Ebda utenti misjuba"
   },
   "form": {
     "title": "Żid Utent Ġdid",

@@ -2,14 +2,25 @@
 import AppHeader from '@/components/AppHeader.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import { RouterView } from 'vue-router'
+import MobileSidebar from '@/components/MobileSidebar.vue'
+import { ref } from 'vue'
+
+const sidebarVisible = ref(false)
+
+const toggleSidebar = () => {
+  sidebarVisible.value = !sidebarVisible.value
+}
 </script>
 
 <template>
   <div class="app-wrapper">
-    <AppHeader />
-    <main class="flex-1 overflow-y-auto p-8">
+    <AppHeader @toggle-sidebar="toggleSidebar" />
+    <MobileSidebar :visible="sidebarVisible" @toggle-sidebar="toggleSidebar" />
+
+    <main>
       <RouterView />
     </main>
+
     <AppFooter />
   </div>
 </template>
@@ -22,11 +33,5 @@ import { RouterView } from 'vue-router'
   width: 100%;
   background-color: var(--color-background);
   color: var(--color-text);
-}
-
-.main-content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 2rem;
 }
 </style>

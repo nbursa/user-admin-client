@@ -32,7 +32,8 @@
     "search": "Pretraži korisnike...",
     "name": "Ime",
     "email": "Email",
-    "age": "Godine"
+    "age": "Godine",
+    "noData": "Nema pronađenih korisnika"
   },
   "form": {
     "title": "Dodaj novog korisnika",
