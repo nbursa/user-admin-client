@@ -85,6 +85,12 @@ const emit = defineEmits(['toggle-sidebar'])
   transform: translateX(-100%);
 }
 
+@media (min-width: 480px) {
+  .mobile-sidebar {
+    max-width: 300px;
+  }
+}
+
 @media (min-width: 768px) {
   .mobile-sidebar {
     display: none;

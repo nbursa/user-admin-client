@@ -167,6 +167,31 @@ const changeLang = (lang: string) => {
   color: var(--color-text) !important;
 }
 
+@media (min-width: 768px) {
+  .app-header {
+    padding: 0.5rem 1.5rem;
+  }
+
+  .lang-toggle,
+  .theme-toggle {
+    font-size: 1rem;
+    padding: 0.15rem 0.4rem;
+  }
+
+  .theme-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mobile-nav-toggle {
+    display: none;
+  }
+
+  .actions {
+    gap: 0.75rem;
+  }
+}
+
 @media (max-width: 768px) {
   .mobile-nav-toggle {
     display: inline-flex;
