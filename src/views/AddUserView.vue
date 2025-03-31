@@ -45,7 +45,7 @@ const handleSubmit = async (payload: { name: string; email: string; age: number 
 <style scoped>
 .add-user-view {
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
 }
 

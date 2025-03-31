@@ -151,10 +151,8 @@ defineExpose({
 
 .el-form {
   background-color: var(--color-background-soft);
-  padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.3s ease;
+  background-color: transparent;
 }
 
 .fields {

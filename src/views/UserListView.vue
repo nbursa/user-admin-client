@@ -62,7 +62,7 @@ fetchUsers()
             :data="users"
             class="user-table"
             style="width: 100%"
-            max-height="calc(72vh - 150px)"
+            :height="'100%'"
             header-cell-class-name="table-header"
             :empty-text="t('users.noData')"
           >
@@ -107,7 +107,7 @@ fetchUsers()
 }
 
 .user-list-view {
-  height: 72vh;
+  height: 70vh;
   max-width: 40rem;
   display: flex;
   justify-content: center;
@@ -127,7 +127,6 @@ fetchUsers()
   height: 100%;
   width: 100%;
   border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
 }
 
 .search-form {
@@ -136,8 +135,15 @@ fetchUsers()
 
 .user-table-container {
   flex: 1;
-  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   overflow: hidden;
+}
+
+:deep(.user-table) {
+  background-color: transparent;
+  border-radius: 6px;
 }
 
 :deep(.el-input__wrapper) {
@@ -147,8 +153,8 @@ fetchUsers()
     background-color 0.3s ease,
     color 0.3s ease;
   border-color: var(--color-border);
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 :deep(.el-input__wrapper.is-focus) {
@@ -161,19 +167,22 @@ fetchUsers()
   color: var(--color-text);
 }
 
-.user-table {
-  background-color: transparent;
-  border-radius: 6px;
-}
-
 .user-pagination {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   border-radius: 8px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.04);
   transition: background-color 0.3s ease;
+}
+
+:deep(.el-table--border::after),
+:deep(.el-table--border::before),
+:deep(.el-table__inner-wrapper::after),
+:deep(.el-table__inner-wrapper::before) {
+  background-color: transparent !important;
+  content: none !important;
 }
 
 :deep(.el-table td.el-table__cell),
@@ -230,9 +239,10 @@ fetchUsers()
   }
 }
 
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) {
   .user-list-view {
-    padding: 1rem;
+    padding: 0.5rem;
+    height: 65vh;
   }
-}
+} */
 </style>
