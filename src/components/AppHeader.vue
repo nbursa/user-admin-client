@@ -133,7 +133,7 @@ const changeLang = (lang: string) => {
 .lang-toggle,
 .theme-toggle {
   font-size: 1.25rem;
-  color: gray;
+  color: var(--color-text);
   cursor: pointer;
   transition: color 0.2s ease;
   background: none;
@@ -143,7 +143,7 @@ const changeLang = (lang: string) => {
 
 .lang-toggle:hover,
 .theme-toggle:hover {
-  color: #42b983;
+  color: var(--color-accent);
 }
 
 .theme-icon {

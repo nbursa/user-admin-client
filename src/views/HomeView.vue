@@ -33,9 +33,14 @@
 
 <style scoped>
 .home {
-  width: 100%;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
   padding: 1rem;
+  overflow: auto;
+  box-sizing: border-box;
 }
 
 .intro {
@@ -54,8 +59,8 @@
 }
 
 .features {
+  width: 100%;
   max-width: 1000px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
@@ -79,7 +84,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  home {
+  .home {
     padding: 2rem;
   }
 }

@@ -4,8 +4,11 @@ import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import debounce from 'lodash/debounce'
 import { API_URL } from '@/lib/api'
+import { useRouter } from 'vue-router'
+import type { User } from '@/types/user'
 
 const { t } = useI18n()
+const router = useRouter()
 
 const search = ref('')
 const users = ref([])
@@ -27,6 +30,10 @@ const fetchUsers = async () => {
 
 const handlePageChange = (page: number) => {
   currentPage.value = page
+}
+
+const handleRowClick = (user: User) => {
+  router.push(`/users/${user.id}/edit`)
 }
 
 const debouncedFetch = debounce(fetchUsers, 300)
@@ -65,6 +72,7 @@ fetchUsers()
             :height="'100%'"
             header-cell-class-name="table-header"
             :empty-text="t('users.noData')"
+            @row-click="handleRowClick"
           >
             <el-table-column prop="name" :label="t('users.name')" min-width="60" max-width="80" />
             <el-table-column prop="email" :label="t('users.email')" />
@@ -141,6 +149,16 @@ fetchUsers()
   overflow: hidden;
 }
 
+.user-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.3s ease;
+}
+
 :deep(.user-table) {
   background-color: transparent;
   border-radius: 6px;
@@ -167,14 +185,13 @@ fetchUsers()
   color: var(--color-text);
 }
 
-.user-pagination {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  padding: 0.5rem 0;
-  border-radius: 8px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.04);
+:deep(.el-table__row) {
+  cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+:deep(.el-table__row:hover) {
+  background-color: var(--color-background-hover) !important;
 }
 
 :deep(.el-table--border::after),
@@ -238,11 +255,4 @@ fetchUsers()
     font-size: 0.95rem;
   }
 }
-
-/* @media screen and (min-width: 768px) {
-  .user-list-view {
-    padding: 0.5rem;
-    height: 65vh;
-  }
-} */
 </style>

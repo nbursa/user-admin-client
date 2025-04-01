@@ -1,10 +1,26 @@
 <script setup lang="ts">
 import { object, string, number } from 'yup'
 import { useForm, useField } from 'vee-validate'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import type { FormValues } from '@/types/user'
 
 const { t } = useI18n()
+
+const props = defineProps<{
+  mode: 'create' | 'edit'
+  initialValues?: {
+    id?: string
+    name: string
+    email: string
+    age: number | null
+  }
+}>()
+
+const emit = defineEmits<{
+  (e: 'submit', payload: { name: string; email: string; age: number | null }): void
+  (e: 'delete'): void
+}>()
 
 const schema = object({
   name: string().required(t('form.errors.nameRequired')),
@@ -15,19 +31,13 @@ const schema = object({
     .min(19, t('form.errors.ageMin')),
 })
 
-type FormValues = {
-  name: string
-  email: string
-  age: number | null
-}
-
 const formError = ref<string | null>(null)
 const formSuccess = ref<string | null>(null)
 
 const { handleSubmit, resetForm, setFieldError } = useForm<FormValues>({
   validationSchema: schema,
   validateOnMount: false,
-  initialValues: {
+  initialValues: props.initialValues || {
     name: '',
     email: '',
     age: null,
@@ -37,6 +47,16 @@ const { handleSubmit, resetForm, setFieldError } = useForm<FormValues>({
 const { value: name, errorMessage: nameError } = useField<string>('name')
 const { value: email, errorMessage: emailError } = useField<string>('email')
 const { value: age, errorMessage: ageError } = useField<number | null>('age')
+
+watch(
+  () => props.initialValues,
+  (values) => {
+    if (values) {
+      resetForm({ values })
+    }
+  },
+  { immediate: true },
+)
 
 const onAgeInput = (value: number | null) => {
   if (typeof value !== 'number' || isNaN(value)) {
@@ -61,19 +81,9 @@ const setFormSuccess = (message: string | null) => {
   formError.value = null
 }
 
-const emit = defineEmits<{
-  (e: 'submit', payload: FormValues): void
-}>()
-
 const submitForm = handleSubmit((values: FormValues) => {
   emit('submit', values)
 })
-
-const setFormValues = (payload: FormValues) => {
-  name.value = payload.name
-  email.value = payload.email
-  age.value = payload.age
-}
 
 const clearForm = () => {
   resetForm({ values: { name: '', email: '', age: null }, errors: {} })
@@ -83,10 +93,9 @@ const clearForm = () => {
 
 defineExpose({
   submitForm,
-  setFormValues,
+  clearForm,
   setFormError,
   setFormSuccess,
-  clearForm,
   setFieldError,
 })
 </script>
@@ -118,9 +127,19 @@ defineExpose({
       </div>
 
       <el-form-item>
-        <el-button type="success" native-type="submit">
-          {{ $t('app.submit') }}
-        </el-button>
+        <div :class="['button-group', { 'two-buttons': mode === 'edit' }]">
+          <el-button type="success" native-type="submit" class="form-button">
+            {{ mode === 'edit' ? $t('form.save') : $t('form.submit') }}
+          </el-button>
+          <el-button
+            v-if="mode === 'edit'"
+            type="danger"
+            @click="$emit('delete')"
+            class="form-button"
+          >
+            {{ $t('form.delete') }}
+          </el-button>
+        </div>
       </el-form-item>
 
       <el-alert
@@ -145,14 +164,13 @@ defineExpose({
 
 <style scoped>
 .form-wrapper {
-  max-width: 25rem;
+  width: 25rem;
   margin: 0 auto;
 }
 
 .el-form {
-  background-color: var(--color-background-soft);
-  border-radius: 8px;
   background-color: transparent;
+  border-radius: 8px;
 }
 
 .fields {
@@ -165,9 +183,28 @@ defineExpose({
 }
 
 .el-button {
-  width: 100%;
   padding: 1rem 2rem;
   min-width: 10rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.form-button {
+  flex: 1;
+  padding: 1rem 2rem;
+  min-width: 0;
+}
+
+.button-group:not(.two-buttons) .form-button {
+  max-width: 100%;
+}
+
+.form-alert {
+  margin-top: 1rem;
 }
 
 :deep(.el-form-item__label) {
@@ -209,7 +246,9 @@ defineExpose({
   border-color: var(--color-accent-hover);
 }
 
-.form-alert {
-  margin-top: 1rem;
+:deep(.el-button--danger) {
+  background-color: #ff4d4f;
+  border-color: #ff4d4f;
+  color: white;
 }
 </style>
