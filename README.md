@@ -10,47 +10,75 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-Utility--First-38bdf8?logo=tailwindcss)
 ![Docker](https://img.shields.io/badge/Dockerized-FE%2FBE%2FMongo-blue?logo=docker)
 
-A lightweight, responsive admin interface for managing users. Built using Vue 3, Vite, Element Plus, and VeeValidate.
+This is the frontend application for managing users. Built with Vue 3 and Vite, it provides a responsive and user-friendly interface for CRUD operations, form validation, and internationalization.
+
+## Tech Stack
+
+- **Framework:** Vue 3 (Composition API)
+- **Bundler:** Vite
+- **UI Library:** Element Plus(users table and pagination)
+- **Validation:** VeeValidate + Yup
+- **State Management:** Pinia
+- **Styling:** Tailwind CSS
+- **Internationalization:** vue-i18n (English, Maltese, Serbian)
+- **Language:** TypeScript
+- **Containerization:** Docker
 
 ## Features
 
 - **User CRUD**: Create, read, update, and delete user records.
-- **Form validation**: Robust schema-based validation with VeeValidate and Yup.
-- **Internationalization (i18n)**: Available in English, Serbian, and Maltese.
+- **Form validation**: Schema-based validation with VeeValidate and Yup.
+- **Internationalization (i18n)**: Available in English, Maltese, and Serbian.
 - **Dark/light theme**: Toggleable theme with persisted state.
 - **Mobile-friendly**: Fully responsive layout with clean design.
 - **Modern stack**: Vue 3 Composition API with TypeScript.
-- **Modular architecture**: Scalable, testable, and well-structured code.
-- **Dockerized**: Includes Docker setup for frontend, backend (Golang), and MongoDB(backend).
+- **Modular architecture**: Scalable, testable, structured code.
+- **Dockerized**: Utilized Docker setup.
 
 ## Project Setup
+
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+Start development server:
 
 ```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+Type-Check, Compile and Minify for Production:
 
 ```bash
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+Run Unit Tests with [Vitest](https://vitest.dev/):
 
 ```bash
 npm run test:unit
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+Lint with [ESLint](https://eslint.org/):
 
 ```bash
 npm run lint
+```
+
+## Docker
+
+Run app with Docker:
+
+```bash
+docker compose up --build
+```
+
+The frontend will be available at:
+
+```bash
+http://localhost:5173
 ```
 
 ---
