@@ -5,7 +5,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Home',
-    component: HomeView, // Best practice, eager load
+    component: HomeView,
   },
   {
     path: '/users',
@@ -17,6 +17,11 @@ const routes: RouteRecordRaw[] = [
     name: 'AddUser',
     component: () => import('@/views/AddUserView.vue'),
   },
+  {
+    path: '/users/:id/edit',
+    name: 'UserEdit',
+    component: () => import('@/views/EditUserView.vue'),
+  },
 ]
 
 const router = createRouter({
@@ -24,4 +29,5 @@ const router = createRouter({
   routes,
 })
 
+export { routes }
 export default router

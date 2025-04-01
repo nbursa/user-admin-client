@@ -37,10 +37,23 @@
   },
   "form": {
     "title": "Dodaj novog korisnika",
+    "editTitle": "Izmeni korisnika",
     "name": "Ime",
     "email": "Email",
     "age": "Godine",
-    "success": "Korisnik je uspešno dodat",
+    "submit": "Pošalji",
+    "update": "Ažuriraj",
+    "delete": "Obriši",
+    "save": "Sačuvaj",
+    "success": {
+      "create": "Korisnik je uspešno dodat",
+      "update": "Korisnik je uspešno ažuriran",
+      "delete": "Korisnik je uspešno obrisan"
+    },
+    "confirm": {
+      "delete": "Da li ste sigurni da želite da obrišete ovog korisnika?",
+      "title": "Potvrda brisanja"
+    },
     "errors": {
       "nameRequired": "Ime je obavezno",
       "emailRequired": "Email je obavezan",
@@ -48,7 +61,10 @@
       "ageRequired": "Godine su obavezne",
       "ageMin": "Mora imati više od 18 godina",
       "emailExists": "Korisnik sa ovom email adresom već postoji",
-      "invalidInput": "Neispravan unos u formi"
+      "invalidInput": "Neispravan unos u formi",
+      "loadFailed": "Neuspešno učitavanje korisnika",
+      "unknown": "Došlo je do nepoznate greške",
+      "deleteFailed": "Brisanje korisnika nije uspelo"
     }
   },
   "errors": {

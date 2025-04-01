@@ -37,10 +37,23 @@
   },
   "form": {
     "title": "Żid Utent Ġdid",
+    "editTitle": "Iddreggja l-Utent",
     "name": "Isem",
     "email": "Email",
     "age": "Età",
-    "success": "L-utent ġie miżjud b'suċċess",
+    "submit": "Ibgħat",
+    "update": "Aġġorna",
+    "delete": "Ħassar",
+    "save": "Issejvja",
+    "success": {
+      "create": "L-utent ġie miżjud b'suċċess",
+      "update": "L-utent ġie aġġornat b’suċċess",
+      "delete": "L-utent tħassar b’suċċess"
+    },
+    "confirm": {
+      "delete": "Żgur li trid tħassar dan l-utent?",
+      "title": "Konferma Ħassar"
+    },
     "errors": {
       "nameRequired": "L-isem huwa obbligatorju",
       "emailRequired": "L-email hija obbligatorja",
@@ -48,7 +61,10 @@
       "ageRequired": "L-età hija obbligatorja",
       "ageMin": "Għandu jkun aktar minn 18-il sena",
       "emailExists": "Utent b'dan l-email diġà jeżisti",
-      "invalidInput": "Input mhux validu fil-formola"
+      "invalidInput": "Input mhux validu fil-formola",
+      "loadFailed": "Naqas milli jitgħabba l-utent",
+      "unknown": "Seħħ żball mhux magħruf",
+      "deleteFailed": "Naqas milli jitħassar l-utent"
     }
   },
   "errors": {
