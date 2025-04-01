@@ -12,22 +12,14 @@ import ElementPlus from 'element-plus'
 import { createI18n } from 'vue-i18n'
 import axios from 'axios'
 import flushPromises from 'flush-promises'
+import en from '@/locales/en.json'
 
 const mockedAxios = axios as unknown as { get: ReturnType<typeof vi.fn> }
 
 const i18n = createI18n({
   legacy: false,
   locale: 'en',
-  messages: {
-    en: {
-      users: {
-        search: 'Search users...',
-        name: 'Name',
-        email: 'Email',
-        age: 'Age',
-      },
-    },
-  },
+  messages: { en },
 })
 
 beforeEach(() => {

@@ -2,45 +2,19 @@ import { mount } from '@vue/test-utils'
 import UserForm from '@/components/UserForm.vue'
 import ElementPlus from 'element-plus'
 import { createI18n } from 'vue-i18n'
+import en from '@/locales/en.json'
+import type { UserFormInstance } from '@/types/user'
 
 const i18n = createI18n({
   legacy: false,
   locale: 'en',
-  messages: {
-    en: {
-      form: {
-        name: 'Name',
-        email: 'Email',
-        age: 'Age',
-        title: 'Add User',
-        success: 'User created successfully',
-        deleteSuccess: 'User deleted successfully',
-        errors: {
-          nameRequired: 'Name is required',
-          emailRequired: 'Email is required',
-          emailInvalid: 'Email is not valid',
-          ageRequired: 'Age is required',
-          ageMin: 'User must be older than 18',
-          emailExists: 'Email already exists',
-          invalidInput: 'Invalid input',
-        },
-      },
-      app: {
-        submit: 'Submit',
-        update: 'Update',
-        delete: 'Delete',
-      },
-      errors: {
-        generic: 'Something went wrong',
-        unexpected: 'Unexpected error occurred',
-      },
-    },
-  },
+  messages: { en },
 })
 
 describe('UserForm', () => {
   it('renders form with name, email, and age fields', () => {
     const wrapper = mount(UserForm, {
+      props: { mode: 'create' },
       global: {
         plugins: [ElementPlus, i18n],
       },
@@ -53,26 +27,25 @@ describe('UserForm', () => {
 
   it('emits submit event with valid data', async () => {
     const wrapper = mount(UserForm, {
+      props: { mode: 'create' },
       global: {
         plugins: [ElementPlus, i18n],
       },
     })
 
-    const vm = wrapper.vm as unknown as {
-      submitForm: () => Promise<void>
-      setFormValues: (values: { name: string; email: string; age: number }) => void
-    }
+    const nameInput = wrapper.find('input[name="name"]')
+    const emailInput = wrapper.find('input[name="email"]')
+    const ageInput = wrapper.findComponent({ name: 'ElInputNumber' }).find('input')
 
-    vm.setFormValues({
-      name: 'John Test',
-      email: 'john@test.com',
-      age: 25,
-    })
+    await nameInput.setValue('John Test')
+    await emailInput.setValue('john@test.com')
+    await ageInput.setValue(25)
 
-    await vm.submitForm()
+    await (wrapper.vm as UserFormInstance).submitForm()
 
-    expect(wrapper.emitted('submit')).toBeTruthy()
-    expect(wrapper.emitted('submit')?.[0][0]).toEqual({
+    const emitted = wrapper.emitted('submit')
+    expect(emitted).toBeTruthy()
+    expect(emitted?.[0][0]).toEqual({
       name: 'John Test',
       email: 'john@test.com',
       age: 25,
@@ -84,8 +57,9 @@ describe('UserForm', () => {
       props: {
         mode: 'edit',
         initialValues: {
-          name: 'Jane Doe',
-          email: 'jane@example.com',
+          id: '123',
+          name: 'Test User',
+          email: 'test@example.com',
           age: 30,
         },
       },
@@ -94,7 +68,7 @@ describe('UserForm', () => {
       },
     })
 
-    expect(wrapper.text()).toContain('Update')
-    expect(wrapper.text()).toContain('Delete')
+    expect(wrapper.find('button.el-button--success').exists()).toBe(true)
+    expect(wrapper.find('button.el-button--danger').exists()).toBe(true)
   })
 })
