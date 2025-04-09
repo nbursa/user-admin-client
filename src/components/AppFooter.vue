@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <p>&copy; 2025 ABC Company</p>
+    <p>&copy; 2025 nenadbursac.com</p>
   </footer>
 </template>
 
