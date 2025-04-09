@@ -20,7 +20,7 @@ This is the frontend application for managing users. Built with Vue 3 and Vite, 
 - **Validation:** VeeValidate + Yup
 - **State Management:** Pinia
 - **Styling:** CSS
-- **Internationalization:** vue-i18n (English, Maltese, Serbian)
+- **Internationalization:** vue-i18n
 - **Language:** TypeScript
 - **Containerization:** Docker
 
