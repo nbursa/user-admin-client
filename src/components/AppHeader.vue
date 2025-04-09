@@ -21,7 +21,11 @@ const changeLang = (lang: string) => {
 
 <template>
   <header class="app-header">
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" />
+    <div class="logo-wrapper">
+      <img alt="Vue logo" class="vue-logo" src="@/assets/logo.svg" />
+      <span class="logo-plus">+</span>
+      <img alt="Vue logo" class="go-logo" src="@/assets/go.png" />
+    </div>
 
     <div class="right">
       <nav class="nav">
@@ -67,12 +71,30 @@ const changeLang = (lang: string) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 0.25rem;
 }
 
-.logo {
-  width: 25px;
-  height: 25px;
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.vue-logo {
+  width: 29px;
+  height: 29px;
+}
+
+.logo-plus {
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 900;
+  margin-left: 5px;
+  margin-right: -1px;
+}
+
+.go-logo {
+  width: 36px;
+  height: 36px;
 }
 
 .right {
@@ -100,7 +122,7 @@ const changeLang = (lang: string) => {
 
 .nav-link:hover {
   color: var(--color-accent);
-  background-color: var(--color-background-mute);
+  background-color: transparent;
 }
 
 .active-link {
@@ -156,10 +178,24 @@ const changeLang = (lang: string) => {
   display: none;
   min-width: 2.75rem;
   min-height: 2.75rem;
-  padding: 0.5rem;
+  padding: 0;
   border-radius: 50%;
   align-items: center;
   justify-content: center;
+}
+
+.mobile-nav-toggle .el-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+}
+
+.mobile-nav-toggle .el-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.5rem;
 }
 
 :deep(.el-dropdown-menu__item:hover) {
@@ -169,7 +205,7 @@ const changeLang = (lang: string) => {
 
 @media (min-width: 768px) {
   .app-header {
-    padding: 0.5rem 1.5rem;
+    padding: 0 1.5rem;
   }
 
   .lang-toggle,

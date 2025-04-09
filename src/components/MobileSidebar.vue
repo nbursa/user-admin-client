@@ -33,7 +33,7 @@ const emit = defineEmits(['toggle-sidebar'])
   width: 100%;
   background-color: var(--color-background-soft);
   box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
-  padding: 0.5rem;
+  padding: 0.25rem 0.25rem;
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -48,6 +48,7 @@ const emit = defineEmits(['toggle-sidebar'])
   margin-top: 2rem;
   gap: 1rem;
   text-align: center;
+  padding: 0.75rem;
 }
 
 .sidebar-nav a {
@@ -74,6 +75,20 @@ const emit = defineEmits(['toggle-sidebar'])
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.close-btn .el-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+}
+
+.close-btn .el-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .slide-enter-active,

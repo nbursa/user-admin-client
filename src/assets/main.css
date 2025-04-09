@@ -26,14 +26,20 @@
 }
 
 .el-dropdown-menu__item {
-  background-color: transparent;
   color: var(--color-text);
   padding: 0.5rem 1rem;
   transition: color 0.2s ease;
   font-weight: 500;
 }
 
-.el-dropdown-menu__item:hover {
+ul.el-dropdown-menu li.el-dropdown-menu__item {
+  background-color: transparent !important;
+}
+
+ul.el-dropdown-menu li.el-dropdown-menu__item:hover,
+ul.el-dropdown-menu li.el-dropdown-menu__item:focus,
+ul.el-dropdown-menu li.el-dropdown-menu__item:focus-visible,
+ul.el-dropdown-menu li.el-dropdown-menu__item:active {
   background-color: transparent !important;
   color: var(--color-accent) !important;
 }
