@@ -19,7 +19,7 @@ This is the frontend application for managing users. Built with Vue 3 and Vite, 
 - **UI Library:** Element Plus(users table and pagination)
 - **Validation:** VeeValidate + Yup
 - **State Management:** Pinia
-- **Styling:** CSS
+- **Styling:** Scoped CSS + Element Plus
 - **Internationalization:** vue-i18n
 - **Language:** TypeScript
 - **Containerization:** Docker
